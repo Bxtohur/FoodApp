@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Food App</string>
+    <string name="text_name">Hi Binarian,</string>
+    <string name="text_greeting">Mau makan apa hari ini?</string>
+    <string name="text_rice">Nasi</string>
+    <string name="text_mie">Mie</string>
+    <string name="text_snack">Snack</string>
+    <string name="text_drink">Minuman</string>
+    <string name="txt_banner_desc">Untuk pemesanan lewat aplikasi</string>
+    <string name="text_list_menu">List menu makanan</string>
+    <string name="text_value_discount">30%</string>
+    <string name="text_discount">Discount s/d</string>
+    <string name="text_menu_1">Ayam Bakar</string>
+    <string name="text_price_menu_1">Rp. 50.000</string>
+    <string name="text_menu_2">Ayam Goreng</string>
+    <string name="text_price_menu_2">Rp. 40.000</string>
+    <string name="text_menu_3">Ayam Geprek</string>
+    <string name="text_price_menu_3">Rp. 40.000</string>
+    <string name="text_menu_4">Sate Usus Ayam</string>
+    <string name="text_price_menu_4">Rp. 5.000</string>
+    <string name="desc_icon_cart">icon cart</string>
+    <string name="desc_icon_user">icon user</string>
+    <string name="desc_icon_rice">icon rice</string>
+    <string name="desc_icon_noodles">icon noodles</string>
+    <string name="desc_icon_snack">icon snack</string>
+    <string name="desc_icon_drink">icon drink</string>
+    <string name="desc_backgoround_banner">backgoround banner</string>
+    <string name="desc_icon_list">icon list</string>
 </resources>
