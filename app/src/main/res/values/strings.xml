@@ -26,4 +26,7 @@
     <string name="desc_icon_drink">icon drink</string>
     <string name="desc_backgoround_banner">backgoround banner</string>
     <string name="desc_icon_list">icon list</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_add_to_cart">Tambah ke keranjang - Rp.%1d</string>
 </resources>
