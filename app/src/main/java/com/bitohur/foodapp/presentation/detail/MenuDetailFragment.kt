@@ -84,9 +84,9 @@ class MenuDetailFragment : Fragment() {
 
     private fun navigateToMaps() {
         binding.llLocation.setOnClickListener {
-            val lokasi = menu?.location
+            val location = menu?.location
 
-            val gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(lokasi))
+            val gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(location))
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
 
