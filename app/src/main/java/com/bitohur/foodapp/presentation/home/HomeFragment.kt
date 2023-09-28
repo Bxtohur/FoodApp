@@ -10,16 +10,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bitohur.foodapp.R
+import com.bitohur.foodapp.data.CategoriesDataSourceImpl
 import com.bitohur.foodapp.data.MenuDataSource
 import com.bitohur.foodapp.data.MenuDataSourceImpl
 import com.bitohur.foodapp.databinding.FragmentHomeBinding
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.presentation.home.adapter.AdapterLayoutMode
+import com.bitohur.foodapp.presentation.home.adapter.CategoriesListAdapter
 import com.bitohur.foodapp.presentation.home.adapter.MenuListAdapter
 
 class FragmentHome : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private var isPlaying = false
+    private var isGridMode = false
 
     private val dataSource: MenuDataSource by lazy {
         MenuDataSourceImpl()
@@ -50,9 +53,6 @@ class FragmentHome : Fragment() {
         setUpList()
         setClickListener()
     }
-
-    private var isGridMode = false
-
     private fun setClickListener() {
         binding.ibButtonListGrid.setOnClickListener {
             val layoutManager = binding.rvMenu.layoutManager as? GridLayoutManager
@@ -80,6 +80,11 @@ class FragmentHome : Fragment() {
             adapter = this@FragmentHome.adapter
         }
         adapter.submitData(dataSource.getMenus())
+
+        val categoryListAdapter = CategoriesListAdapter()
+        binding.rvCategories.adapter = categoryListAdapter
+        binding.rvCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        categoryListAdapter.setData(CategoriesDataSourceImpl().getCategories())
     }
 
 }

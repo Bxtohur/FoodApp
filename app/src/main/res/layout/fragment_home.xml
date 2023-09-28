@@ -61,151 +61,22 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_category"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/cl_header">
-
-        <androidx.constraintlayout.helper.widget.Flow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:constraint_referenced_ids="cv_category_rice,cv_category_mie,cv_category_snack,cv_category_drink"
-            app:flow_horizontalStyle="spread_inside"
-            app:flow_wrapMode="aligned"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_category_rice"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:cardBackgroundColor="@color/primary_color_container"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/desc_icon_rice"
-                    android:src="@drawable/ic_rice" />
-
-                <TextView
-                    style="@style/TextAppearance.Material3.LabelLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/text_rice"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_category_mie"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:cardBackgroundColor="@color/primary_color_container"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/desc_icon_noodles"
-                    android:src="@drawable/ic_mie" />
-
-                <TextView
-                    style="@style/TextAppearance.Material3.LabelLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/text_mie"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_category_snack"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:cardBackgroundColor="@color/primary_color_container"
-            app:cardCornerRadius="8dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/desc_icon_snack"
-                    android:src="@drawable/ic_snack" />
-
-                <TextView
-                    style="@style/TextAppearance.Material3.LabelLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/text_snack"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_category_drink"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:cardBackgroundColor="@color/primary_color_container"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/desc_icon_drink"
-                    android:src="@drawable/ic_drink" />
-
-                <TextView
-                    style="@style/TextAppearance.Material3.LabelLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/text_drink"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_header"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_list_categories"
+        android:orientation="horizontal" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cv_banner"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/cl_category">
+        app:layout_constraintTop_toBottomOf="@id/rv_categories">
 
         <ImageView
             android:layout_width="match_parent"
@@ -266,16 +137,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:background="@android:color/transparent"
-                    android:id="@+id/ib_button_list_grid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/desc_icon_list"
-                    android:paddingVertical="8dp"
-                    android:src="@drawable/ic_list"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/ib_button_list_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/desc_icon_list"
+            android:paddingVertical="8dp"
+            android:src="@drawable/ic_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
