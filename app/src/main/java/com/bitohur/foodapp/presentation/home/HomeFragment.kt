@@ -15,6 +15,7 @@ import com.bitohur.foodapp.data.MenuDataSource
 import com.bitohur.foodapp.data.MenuDataSourceImpl
 import com.bitohur.foodapp.databinding.FragmentHomeBinding
 import com.bitohur.foodapp.model.Menu
+import com.bitohur.foodapp.presentation.detail.DetailProductActivity
 import com.bitohur.foodapp.presentation.home.adapter.AdapterLayoutMode
 import com.bitohur.foodapp.presentation.home.adapter.CategoriesListAdapter
 import com.bitohur.foodapp.presentation.home.adapter.MenuListAdapter
@@ -34,10 +35,8 @@ class FragmentHome : Fragment() {
         }
     }
 
-    private fun navigateToDetail(menu: Menu) {
-        findNavController().navigate(
-            FragmentHomeDirections.actionHomeFragmentToMenuDetailFragment(menu)
-        )
+    private fun navigateToDetail(item: Menu) {
+        DetailProductActivity.startActivity(requireContext(), item)
     }
 
     override fun onCreateView(
