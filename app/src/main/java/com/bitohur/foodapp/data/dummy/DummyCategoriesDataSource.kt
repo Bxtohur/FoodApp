@@ -6,7 +6,7 @@ interface DummyCategoriesDataSource {
     fun getCategories(): List<Categories>
 }
 
-class CategoriesDataSourceImpl(): DummyCategoriesDataSource {
+class DummyCategoriesDataSourceImpl(): DummyCategoriesDataSource {
     override fun getCategories(): List<Categories> = mutableListOf(
         Categories(
             categories = "Nasi",
