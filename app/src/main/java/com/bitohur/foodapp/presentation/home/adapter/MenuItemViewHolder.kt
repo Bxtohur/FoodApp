@@ -6,11 +6,7 @@ import com.bitohur.foodapp.core.ViewHolderBinder
 import com.bitohur.foodapp.databinding.ItemGridMenuBinding
 import com.bitohur.foodapp.databinding.ItemLinearMenuBinding
 import com.bitohur.foodapp.model.Menu
-
-private fun Double.formatCurrency(currencySymbol: String): String {
-    val formattedAmount = String.format("% ,.0f", this).replace("," , ".")
-    return "$currencySymbol $formattedAmount"
-}
+import com.bitohur.foodapp.utils.toCurrencyFormat
 
 class LinearMenuItemViewHolder(
     private val binding: ItemLinearMenuBinding,
@@ -21,7 +17,7 @@ class LinearMenuItemViewHolder(
             crossfade(true)
         }
         binding.tvMenuTitle.text = item.name
-        binding.tvMenuPrice.text = item.price.formatCurrency("Rp.")
+        binding.tvMenuPrice.text = item.price.toCurrencyFormat()
         binding.tvMenuDesc.text = item.desc
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
@@ -38,7 +34,7 @@ class GridMenuItemViewHolder(
             crossfade(true)
         }
         binding.tvMenuTitle.text = item.name
-        binding.tvMenuPrice.text = item.price.formatCurrency("Rp.")
+        binding.tvMenuPrice.text = item.price.toCurrencyFormat()
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
         }

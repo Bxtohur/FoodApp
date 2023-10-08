@@ -5,11 +5,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.widget.Toast
 import androidx.activity.viewModels
 import coil.load
+import com.bitohur.foodapp.data.local.database.AppDatabase
+import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
+import com.bitohur.foodapp.data.local.database.datasource.CartDatabaseDataSource
+import com.bitohur.foodapp.data.repository.CartRepository
+import com.bitohur.foodapp.data.repository.CartRepositoryImpl
 import com.bitohur.foodapp.databinding.ActivityDetailMenuBinding
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.utils.GenericViewModelFactory
+import com.bitohur.foodapp.utils.proceedWhen
 import com.bitohur.foodapp.utils.toCurrencyFormat
 
 class DetailProductActivity : AppCompatActivity() {
@@ -18,7 +25,11 @@ class DetailProductActivity : AppCompatActivity() {
         ActivityDetailMenuBinding.inflate(layoutInflater)
     }
     private val viewModel: DetailProductViewModel by viewModels {
-        GenericViewModelFactory.create(DetailProductViewModel(this, intent?.extras))
+        val database = AppDatabase.getInstance(this)
+        val cartDao = database.cartDao()
+        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        GenericViewModelFactory.create(DetailProductViewModel(intent?.extras,repo, this ))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +50,9 @@ class DetailProductActivity : AppCompatActivity() {
         binding.btnPlus.setOnClickListener{
             viewModel.add()
         }
+        binding.btnAddToCart.setOnClickListener {
+            viewModel.addToCart()
+        }
         binding.llLocation.setOnClickListener {
             viewModel.navigateToMaps()
         }
@@ -50,6 +64,15 @@ class DetailProductActivity : AppCompatActivity() {
         }
         viewModel.productCountLiveData.observe(this){
             binding.tvCounter.text = it.toString()
+        }
+        viewModel.addToCartResult.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    Toast.makeText(this, "Add to cart success !", Toast.LENGTH_SHORT).show()
+                    finish()
+                }, doOnError = {
+                    Toast.makeText(this, it.exception?.message.orEmpty(), Toast.LENGTH_SHORT).show()
+                })
         }
     }
 

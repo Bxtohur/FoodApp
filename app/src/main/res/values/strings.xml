@@ -52,5 +52,6 @@
     <string name="text_cash">Tunai</string>
     <string name="text_e_wallet">Dompet Digital</string>
     <string name="text_cart_is_empty">Keranjang Kosong</string>
-    <string name="shopping_summary">Ringkasan belanja</string>
+    <string name="shopping_summary">Ringkasan Pembayaran</string>
+    <string name="total_quantity">x%s</string>
 </resources>

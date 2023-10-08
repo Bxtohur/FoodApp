@@ -1,4 +1,4 @@
-package com.bitohur.foodapp.data.local.datasource
+package com.bitohur.foodapp.data.local.database.datasource
 
 import androidx.room.Delete
 import androidx.room.Insert

@@ -17,7 +17,10 @@ class MenuListAdapter(
 ) : RecyclerView.Adapter<ViewHolder>() {
     private val dataDiffer = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Menu>() {
         override fun areItemsTheSame(oldItem: Menu, newItem: Menu): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.name == newItem.name &&
+                    oldItem.price == newItem.price &&
+                    oldItem.menuImgUrl == newItem.menuImgUrl &&
+                    oldItem.desc == newItem.desc
         }
 
         override fun areContentsTheSame(oldItem: Menu, newItem: Menu): Boolean {
