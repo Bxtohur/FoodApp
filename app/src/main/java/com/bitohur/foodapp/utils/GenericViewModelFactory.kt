@@ -1,4 +1,4 @@
-package com.catnip.egroceries.utils
+package com.bitohur.foodapp.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

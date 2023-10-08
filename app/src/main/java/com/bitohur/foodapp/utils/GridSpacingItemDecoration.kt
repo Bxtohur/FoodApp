@@ -1,4 +1,4 @@
-package com.catnip.egroceries.utils
+package com.bitohur.foodapp.utils
 
 import android.graphics.Rect
 import android.view.View
