@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bitohur.foodapp.R
-import com.bitohur.foodapp.data.dummy.CategoriesDataSourceImpl
+import com.bitohur.foodapp.data.dummy.DummyCategoriesDataSourceImpl
 import com.bitohur.foodapp.data.dummy.DummyMenuDataSource
-import com.bitohur.foodapp.data.dummy.MenuDataSourceImpl
+import com.bitohur.foodapp.data.dummy.DummyMenuDataSourceImpl
 import com.bitohur.foodapp.databinding.FragmentHomeBinding
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.presentation.detail.DetailProductActivity
@@ -24,7 +24,7 @@ class FragmentHome : Fragment() {
     private var isGridMode = false
 
     private val dataSource: DummyMenuDataSource by lazy {
-        MenuDataSourceImpl()
+        DummyMenuDataSourceImpl()
     }
 
     private val adapter: MenuListAdapter by lazy {
@@ -81,7 +81,7 @@ class FragmentHome : Fragment() {
         val categoryListAdapter = CategoriesListAdapter()
         binding.rvCategories.adapter = categoryListAdapter
         binding.rvCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        categoryListAdapter.setData(CategoriesDataSourceImpl().getCategories())
+        categoryListAdapter.setData(DummyCategoriesDataSourceImpl().getCategories())
     }
 
 }
