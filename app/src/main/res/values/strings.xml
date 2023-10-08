@@ -29,4 +29,28 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_add_to_cart">Tambah ke keranjang - Rp. %1d</string>
+    <string name="text_header_cart">Keranjang</string>
+    <string name="text_hint_notes">Catatan</string>
+    <string name="text_header_profile">Profile</string>
+    <string name="text_username">Rizal Muhaimin Nur</string>
+    <string name="text_no_hp">089654338768</string>
+    <string name="text_email">bitohur@gmail.com</string>
+    <string name="text_title_email">Email</string>
+    <string name="text_title_username">Username</string>
+    <string name="text_title_no_telepon">No. Telepon</string>
+    <string name="text_btn_add_to_cart">Tambah ke keranjang</string>
+    <string name="text_title_location">Lokasi</string>
+    <string name="text_total_price">180.000</string>
+    <string name="text_order">Pesan</string>
+    <string name="text_title_total_price">Total Harga</string>
+    <string name="text_checkout">Pesan</string>
+    <string name="text_title_order_confirmation">Konfirmasi pemesanan</string>
+    <string name="text_delivery_method">Metode Pemesanan</string>
+    <string name="text_pick_up">Bawa Sendiri</string>
+    <string name="text_delivery">Dikirim</string>
+    <string name="text_payment_method">Metode Pembayaran</string>
+    <string name="text_cash">Tunai</string>
+    <string name="text_e_wallet">Dompet Digital</string>
+    <string name="text_cart_is_empty">Keranjang Kosong</string>
+    <string name="shopping_summary">Ringkasan belanja</string>
 </resources>

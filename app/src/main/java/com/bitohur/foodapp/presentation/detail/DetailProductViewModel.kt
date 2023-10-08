@@ -40,7 +40,7 @@ class DetailProductViewModel(private val context: Context, private val extras: B
         mapIntent.setPackage("com.google.android.apps.maps")
 
         if (mapIntent.resolveActivity(context.packageManager) != null) {
-            Toast.makeText(context, "Google Maps tidak terinstal", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Google Maps not installed", Toast.LENGTH_SHORT).show()
         } else {
             context.startActivity(mapIntent)
         }

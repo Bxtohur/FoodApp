@@ -1,4 +1,4 @@
-package com.catnip.egroceries.utils
+package com.bitohur.foodapp.utils
 
 import android.icu.text.NumberFormat
 import android.icu.util.Currency

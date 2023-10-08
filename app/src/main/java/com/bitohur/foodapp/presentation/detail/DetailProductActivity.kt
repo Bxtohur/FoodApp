@@ -11,7 +11,7 @@ import com.bitohur.foodapp.R
 import com.bitohur.foodapp.databinding.ActivityDetailMenuBinding
 import com.bitohur.foodapp.model.Menu
 import com.catnip.egroceries.utils.GenericViewModelFactory
-import com.catnip.egroceries.utils.toCurrencyFormat
+import com.bitohur.foodapp.utils.toCurrencyFormat
 
 class DetailProductActivity : AppCompatActivity() {
 
@@ -47,7 +47,7 @@ class DetailProductActivity : AppCompatActivity() {
 
     private fun observeData() {
         viewModel.priceLiveData.observe(this){
-            binding.btnAddToCart.text = it.toCurrencyFormat()
+            binding.tvPriceTotal.text = it.toCurrencyFormat()
         }
         viewModel.productCountLiveData.observe(this){
             binding.tvCounter.text = it.toString()
@@ -66,7 +66,7 @@ class DetailProductActivity : AppCompatActivity() {
                 text = item.desc
                 movementMethod = ScrollingMovementMethod()
             }
-            binding.btnAddToCart.text = getString(R.string.text_add_to_cart, item.price.toInt())
+            binding.tvPriceTotal.text = item.price.toCurrencyFormat()
         }
     }
 
