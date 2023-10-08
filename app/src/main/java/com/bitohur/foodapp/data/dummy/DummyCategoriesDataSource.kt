@@ -1,12 +1,12 @@
-package com.bitohur.foodapp.data
+package com.bitohur.foodapp.data.dummy
 
 import com.bitohur.foodapp.model.Categories
 
-interface CategoriesDataSource {
+interface DummyCategoriesDataSource {
     fun getCategories(): List<Categories>
 }
 
-class CategoriesDataSourceImpl(): CategoriesDataSource{
+class CategoriesDataSourceImpl(): DummyCategoriesDataSource {
     override fun getCategories(): List<Categories> = mutableListOf(
         Categories(
             categories = "Nasi",

@@ -7,10 +7,9 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import androidx.activity.viewModels
 import coil.load
-import com.bitohur.foodapp.R
 import com.bitohur.foodapp.databinding.ActivityDetailMenuBinding
 import com.bitohur.foodapp.model.Menu
-import com.catnip.egroceries.utils.GenericViewModelFactory
+import com.bitohur.foodapp.utils.GenericViewModelFactory
 import com.bitohur.foodapp.utils.toCurrencyFormat
 
 class DetailProductActivity : AppCompatActivity() {
@@ -56,7 +55,7 @@ class DetailProductActivity : AppCompatActivity() {
 
     private fun bindProduct(product: Menu?) {
         product?.let { item ->
-            binding.ivBannerDetail.load(item.imgUrl) {
+            binding.ivBannerDetail.load(item.menuImgUrl) {
                 crossfade(true)
             }
             binding.tvMenuName.text = item.name
