@@ -1,4 +1,4 @@
-package com.bitohur.foodapp.data.local.datasource
+package com.bitohur.foodapp.data.local.database.datasource
 
 import com.bitohur.foodapp.data.local.database.dao.CartDao
 import com.bitohur.foodapp.data.local.database.entity.CartEntity

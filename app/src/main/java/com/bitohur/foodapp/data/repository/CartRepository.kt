@@ -3,7 +3,7 @@ package com.bitohur.foodapp.data.repository
 import com.bitohur.foodapp.data.local.database.entity.CartEntity
 import com.bitohur.foodapp.data.local.database.mapper.toCartEntity
 import com.bitohur.foodapp.data.local.database.mapper.toCartMenuList
-import com.bitohur.foodapp.data.local.datasource.CartDataSource
+import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
 import com.bitohur.foodapp.model.Cart
 import com.bitohur.foodapp.model.CartMenu
 import com.bitohur.foodapp.model.Menu
@@ -19,7 +19,7 @@ import java.lang.IllegalStateException
 
 interface CartRepository {
     fun getUserCartData(): Flow<ResultWrapper<Pair<List<CartMenu>, Double>>>
-    suspend fun createCart(product: Menu, totalQuantity: Int): Flow<ResultWrapper<Boolean>>
+    suspend fun createCart(menu: Menu, totalQuantity: Int): Flow<ResultWrapper<Boolean>>
     suspend fun decreaseCart(item: Cart): Flow<ResultWrapper<Boolean>>
     suspend fun increaseCart(item: Cart): Flow<ResultWrapper<Boolean>>
     suspend fun setCartNotes(item: Cart): Flow<ResultWrapper<Boolean>>
@@ -46,7 +46,6 @@ class CartRepositoryImpl(
             delay(2000)
         }
     }
-    //gunakan di detail
     override suspend fun createCart(
         menu: Menu,
         totalQuantity: Int

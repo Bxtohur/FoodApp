@@ -2,7 +2,7 @@ package com.bitohur.foodapp.data.repository
 
 import com.bitohur.foodapp.data.dummy.DummyCategoriesDataSource
 import com.bitohur.foodapp.data.local.database.mapper.toMenuList
-import com.bitohur.foodapp.data.local.datasource.MenuDataSource
+import com.bitohur.foodapp.data.local.database.datasource.MenuDataSource
 import com.bitohur.foodapp.model.Categories
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.utils.ResultWrapper
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onStart
 
 interface MenuRepository {
     fun getCategories(): List<Categories>
-    fun getProducts(): Flow<ResultWrapper<List<Menu>>>
+    fun getMenus(): Flow<ResultWrapper<List<Menu>>>
 }
 
 class MenuRepositoryImpl(
@@ -26,7 +26,7 @@ class MenuRepositoryImpl(
         return dummyCategoryDataSource.getCategories()
     }
 
-    override fun getProducts(): Flow<ResultWrapper<List<Menu>>> {
+    override fun getMenus(): Flow<ResultWrapper<List<Menu>>> {
         return menuDataSource.getAllMenus().map {
             proceed { it.toMenuList() }
         }.onStart {
