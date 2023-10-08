@@ -1,6 +1,5 @@
 package com.bitohur.foodapp.presentation.home.adapter
 
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bitohur.foodapp.core.ViewHolderBinder
@@ -18,7 +17,7 @@ class LinearMenuItemViewHolder(
     private val onClickListener: (Menu) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Menu> {
     override fun bind(item: Menu) {
-        binding.ivMenu.load(item.imgUrl) {
+        binding.ivMenu.load(item.menuImgUrl) {
             crossfade(true)
         }
         binding.tvMenuTitle.text = item.name
@@ -35,7 +34,7 @@ class GridMenuItemViewHolder(
     private val onClickListener: (Menu) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Menu> {
     override fun bind(item: Menu) {
-        binding.ivMenu.load(item.imgUrl) {
+        binding.ivMenu.load(item.menuImgUrl) {
             crossfade(true)
         }
         binding.tvMenuTitle.text = item.name
