@@ -46,18 +46,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_margin="4dp"
                 android:contentDescription="@string/desc_icon_cart"
                 android:src="@drawable/ic_cart" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_margin="4dp"
                 android:contentDescription="@string/desc_icon_user"
-                android:src="@drawable/ic_user" />
+                android:src="@drawable/ic_profile" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

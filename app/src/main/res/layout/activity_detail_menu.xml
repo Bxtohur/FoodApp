@@ -8,9 +8,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_header_detail"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_banner_detail"
@@ -22,10 +22,10 @@
 
         <ImageButton
             android:id="@+id/ib_btn_back"
-            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -76,8 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginVertical="8dp"
-        android:alpha="0.2"
-        android:background="@color/black"
+        android:background="@color/primary_color_container"
         app:layout_constraintTop_toBottomOf="@id/cl_detail" />
 
 
@@ -103,9 +102,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/text_title_location"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="Lokasi" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_location"
@@ -123,8 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginVertical="8dp"
-        android:alpha="0.2"
-        android:background="@color/black"
+        android:background="@color/primary_color_container"
         app:layout_constraintBottom_toTopOf="@id/cl_cart_count" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,44 +134,72 @@
 
         <LinearLayout
             android:id="@+id/ll_counter"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="4dp"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingHorizontal="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:background="@drawable/bg_button_rounded_border_transparent"
+            app:layout_constraintBottom_toTopOf="@id/ll_add_to_cart">
 
             <ImageView
                 android:id="@+id/btn_minus"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_minus" />
 
             <TextView
                 android:id="@+id/tv_counter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:textColor="@color/primary_color_container"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/btn_plus"
                 app:layout_constraintStart_toEndOf="@id/btn_minus"
-                android:text="1" />
+                tools:text="1" />
 
             <ImageView
                 android:id="@+id/btn_plus"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_plus" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_plus"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_add_to_cart"
+        <LinearLayout
+            android:id="@+id/ll_add_to_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_counter"/>
+            app:layout_constraintTop_toBottomOf="@id/ll_counter"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_price_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_total_price"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="16dp" />
+
+            <Button
+                android:id="@+id/btn_add_to_cart"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="12dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_btn_add_to_cart"/>
+
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
