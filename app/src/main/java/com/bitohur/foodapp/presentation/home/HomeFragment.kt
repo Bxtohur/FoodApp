@@ -41,7 +41,12 @@ class FragmentHome : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels {
-        GenericViewModelFactory.create(HomeViewModel(createMenuRepo(), createPreferenceDataSource()))
+        GenericViewModelFactory.create(
+            HomeViewModel(
+                createMenuRepo(),
+                createPreferenceDataSource()
+            )
+        )
     }
 
     private fun createPreferenceDataSource(): UserPreferenceDataSource {
@@ -81,20 +86,24 @@ class FragmentHome : Fragment() {
     }
 
     private fun observeProductData() {
-        viewModel.productListLiveData.observe(viewLifecycleOwner){
+        viewModel.productListLiveData.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
                 it.payload?.let { it1 -> adapter.submitData(it1) }
             })
         }
     }
+
     private fun observeGridPref() {
         viewModel.usingGridLiveData.observe(viewLifecycleOwner) { isUsingGrid ->
             binding.switchListGrid.isChecked = isUsingGrid
-            (binding.rvMenu.layoutManager as GridLayoutManager).spanCount = if (isUsingGrid) 2 else 1
-            adapter.adapterLayoutMode = if(isUsingGrid) AdapterLayoutMode.GRID else AdapterLayoutMode.LINEAR
+            (binding.rvMenu.layoutManager as GridLayoutManager).spanCount =
+                if (isUsingGrid) 2 else 1
+            adapter.adapterLayoutMode =
+                if (isUsingGrid) AdapterLayoutMode.GRID else AdapterLayoutMode.LINEAR
             adapter.refreshList()
         }
     }
+
     private fun setupSwitch() {
         binding.switchListGrid.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setUsingGridPref(isChecked)
@@ -102,25 +111,26 @@ class FragmentHome : Fragment() {
     }
 
     private fun setSwitchAction() {
-        binding.switchListGrid.setOnCheckedChangeListener { _, isUsingGrid->
+        binding.switchListGrid.setOnCheckedChangeListener { _, isUsingGrid ->
             viewModel.setUsingGridPref(isUsingGrid)
         }
     }
 
-    private fun showListCategories(data : List<Categories>) {
+    private fun showListCategories(data: List<Categories>) {
         val categoryListAdapter = CategoriesListAdapter()
         binding.rvCategories.adapter = categoryListAdapter
-        binding.rvCategories.layoutManager = LinearLayoutManager(requireContext(),
-            LinearLayoutManager.HORIZONTAL, false )
+        binding.rvCategories.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL, false
+        )
         categoryListAdapter.setData(data)
     }
 
 
-
     private fun setupList() {
-        val span = if(adapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
+        val span = if (adapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
         binding.rvMenu.apply {
-            layoutManager = GridLayoutManager(requireContext(),span)
+            layoutManager = GridLayoutManager(requireContext(), span)
             adapter = this@FragmentHome.adapter
         }
     }
