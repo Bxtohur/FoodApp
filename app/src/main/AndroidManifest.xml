@@ -15,6 +15,12 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.checkout.CheckoutActivity"
             android:exported="false" />
         <activity
@@ -22,6 +28,9 @@
             android:exported="false" />
         <activity
             android:name=".presentation.main.MainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".presentation.splashscreen.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
