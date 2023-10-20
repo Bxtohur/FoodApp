@@ -12,7 +12,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color_container" />
+        android:background="@color/app_color_primary_container" />
 
     <LinearLayout
         android:layout_width="match_parent"

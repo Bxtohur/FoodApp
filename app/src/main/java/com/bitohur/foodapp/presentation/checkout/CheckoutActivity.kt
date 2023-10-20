@@ -48,20 +48,10 @@ class CheckoutActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupList()
         observeData()
-//        showListSummary()
     }
 
     private fun setupList() {
         binding.layoutContent.rvCart.adapter = adapter
-    }
-    private fun showListSummary() {
-        val summaryListAdapter = SummaryListAdapter()
-        val layoutState = findViewById<View>(R.id.layout_state)
-        val recyclerView = layoutState.findViewById<RecyclerView>(R.id.rv_shopping_summary)
-        recyclerView.adapter = summaryListAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.HORIZONTAL, false )
-        summaryListAdapter.setData(DummyMenuDataSourceImpl().getMenus())
     }
     private fun observeData() {
         binding.ivBack.setOnClickListener {
