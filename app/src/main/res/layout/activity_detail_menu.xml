@@ -136,17 +136,15 @@
             android:id="@+id/ll_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:paddingVertical="4dp"
+            android:background="@drawable/bg_button_rounded_border_transparent"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:paddingVertical="4dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            android:background="@drawable/bg_button_rounded_border_transparent"
-            app:layout_constraintBottom_toTopOf="@id/ll_add_to_cart">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/btn_minus"
@@ -170,35 +168,32 @@
                 android:id="@+id/btn_plus"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_plus"/>
+                android:src="@drawable/ic_plus" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_add_to_cart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_counter"
-            android:gravity="center">
+            android:id="@+id/tv_price_total"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_total_price"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_price_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_total_price"
-                android:textSize="16sp"
-                android:layout_marginHorizontal="16dp" />
-
-            <Button
-                android:id="@+id/btn_add_to_cart"
-                android:layout_width="match_parent"
-                android:layout_marginHorizontal="12dp"
-                android:layout_height="wrap_content"
-                android:text="@string/text_btn_add_to_cart"/>
-
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_add_to_cart"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toEndOf="@id/tv_price_total"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="@string/text_btn_add_to_cart"
+            app:layout_constraintTop_toBottomOf="@id/ll_counter" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

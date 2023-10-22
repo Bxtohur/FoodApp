@@ -4,6 +4,7 @@ import com.bitohur.foodapp.data.local.database.entity.CartEntity
 import com.bitohur.foodapp.model.Cart
 
 fun CartEntity?.toCart() = Cart(
+    id = this?.id,
     productId = this?.productId.orEmpty(),
     productName = this?.productName.orEmpty(),
     productPrice = this?.productPrice ?: 0,
@@ -13,6 +14,7 @@ fun CartEntity?.toCart() = Cart(
 )
 
 fun Cart?.toCartEntity() = CartEntity(
+    id = this?.id,
     productId = this?.productId.orEmpty(),
     productName = this?.productName.orEmpty(),
     productPrice = this?.productPrice ?: 0,
