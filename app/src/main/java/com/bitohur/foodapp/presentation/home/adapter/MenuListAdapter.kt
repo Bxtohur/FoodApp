@@ -19,7 +19,7 @@ class MenuListAdapter(
         override fun areItemsTheSame(oldItem: Menu, newItem: Menu): Boolean {
             return oldItem.name == newItem.name &&
                     oldItem.price == newItem.price &&
-                    oldItem.menuImgUrl == newItem.menuImgUrl &&
+                    oldItem.imageUrl == newItem.imageUrl &&
                     oldItem.desc == newItem.desc
         }
 
