@@ -11,6 +11,8 @@ import coil.load
 import com.bitohur.foodapp.data.local.database.AppDatabase
 import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
 import com.bitohur.foodapp.data.local.database.datasource.CartDatabaseDataSource
+import com.bitohur.foodapp.data.network.api.datasource.FoodAppApiDataSource
+import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
 import com.bitohur.foodapp.data.repository.CartRepository
 import com.bitohur.foodapp.data.repository.CartRepositoryImpl
 import com.bitohur.foodapp.databinding.ActivityDetailMenuBinding
@@ -27,8 +29,10 @@ class DetailProductActivity : AppCompatActivity() {
     private val viewModel: DetailProductViewModel by viewModels {
         val database = AppDatabase.getInstance(this)
         val cartDao = database.cartDao()
+        val service = FoodAppApiService.invoke()
+        val dataSource = FoodAppApiDataSource(service)
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, dataSource)
         GenericViewModelFactory.create(DetailProductViewModel(intent?.extras,repo, this ))
     }
 
@@ -78,7 +82,7 @@ class DetailProductActivity : AppCompatActivity() {
 
     private fun bindProduct(product: Menu?) {
         product?.let { item ->
-            binding.ivBannerDetail.load(item.menuImgUrl) {
+            binding.ivBannerDetail.load(item.imageUrl) {
                 crossfade(true)
             }
             binding.tvMenuName.text = item.name

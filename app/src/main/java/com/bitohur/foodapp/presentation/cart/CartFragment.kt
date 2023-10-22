@@ -12,6 +12,8 @@ import com.bitohur.foodapp.R
 import com.bitohur.foodapp.data.local.database.AppDatabase
 import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
 import com.bitohur.foodapp.data.local.database.datasource.CartDatabaseDataSource
+import com.bitohur.foodapp.data.network.api.datasource.FoodAppApiDataSource
+import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
 import com.bitohur.foodapp.data.repository.CartRepository
 import com.bitohur.foodapp.data.repository.CartRepositoryImpl
 import com.bitohur.foodapp.databinding.FragmentCartBinding
@@ -29,8 +31,10 @@ class CartFragment : Fragment() {
     private val viewModel: CartViewModel by viewModels {
         val database = AppDatabase.getInstance(requireContext())
         val cartDao = database.cartDao()
+        val service = FoodAppApiService.invoke()
+        val dataSource = FoodAppApiDataSource(service)
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, dataSource)
         GenericViewModelFactory.create(CartViewModel(repo))
     }
 

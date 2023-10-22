@@ -1,7 +1,9 @@
 package com.bitohur.foodapp.presentation.checkout
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -13,9 +15,13 @@ import com.bitohur.foodapp.data.dummy.DummyMenuDataSourceImpl
 import com.bitohur.foodapp.data.local.database.AppDatabase
 import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
 import com.bitohur.foodapp.data.local.database.datasource.CartDatabaseDataSource
-import com.bitohur.foodapp.data.local.database.datasource.MenuDataSource
+import com.bitohur.foodapp.data.network.api.datasource.FoodAppApiDataSource
+import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
+import com.bitohur.foodapp.data.network.firebase.auth.FirebaseAuthDataSourceImpl
 import com.bitohur.foodapp.data.repository.CartRepository
 import com.bitohur.foodapp.data.repository.CartRepositoryImpl
+import com.bitohur.foodapp.data.repository.UserRepository
+import com.bitohur.foodapp.data.repository.UserRepositoryImpl
 import com.bitohur.foodapp.databinding.ActivityCheckoutBinding
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.presentation.common.adapter.CartListAdapter
@@ -23,15 +29,21 @@ import com.bitohur.foodapp.utils.GenericViewModelFactory
 import com.bitohur.foodapp.utils.ResultWrapper
 import com.bitohur.foodapp.utils.proceedWhen
 import com.bitohur.foodapp.utils.toCurrencyFormat
+import com.google.firebase.auth.FirebaseAuth
 
 
 class CheckoutActivity : AppCompatActivity() {
     private val viewModel: CheckoutViewModel by viewModels {
         val database = AppDatabase.getInstance(this)
         val cartDao = database.cartDao()
+        val service = FoodAppApiService.invoke()
+        val dataSource = FoodAppApiDataSource(service)
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
-        GenericViewModelFactory.create(CheckoutViewModel(repo))
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, dataSource)
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
+        val userRepo: UserRepository = UserRepositoryImpl(firebaseDataSource)
+        GenericViewModelFactory.create(CheckoutViewModel(repo, userRepo))
     }
 
     private val binding : ActivityCheckoutBinding by lazy {
@@ -48,12 +60,55 @@ class CheckoutActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupList()
         observeData()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.btnCheckout.setOnClickListener {
+            viewModel.createOrder()
+        }
     }
 
     private fun setupList() {
         binding.layoutContent.rvCart.adapter = adapter
     }
+
     private fun observeData() {
+        observeCartData()
+        observeCheckoutResult()
+    }
+
+    private fun observeCheckoutResult() {
+        viewModel.checkoutResult.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.layoutState.root.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    showDialogCheckoutSuccess()
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    Toast.makeText(this, "Checkout Error", Toast.LENGTH_SHORT).show()
+                },
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = true
+                }
+            )
+        }
+    }
+
+    private fun showDialogCheckoutSuccess() {
+        AlertDialog.Builder(this)
+            .setMessage("Checkout Success")
+            .setPositiveButton(getString(R.string.text_okay)) { _, _ ->
+                viewModel.clearCart()
+                finish()
+            }.create().show()
+    }
+
+    private fun observeCartData() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
@@ -98,4 +153,5 @@ class CheckoutActivity : AppCompatActivity() {
             })
         }
     }
+
 }

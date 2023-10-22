@@ -13,7 +13,7 @@ class LinearMenuItemViewHolder(
     private val onClickListener: (Menu) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Menu> {
     override fun bind(item: Menu) {
-        binding.ivMenu.load(item.menuImgUrl) {
+        binding.ivMenu.load(item.imageUrl) {
             crossfade(true)
         }
         binding.tvMenuTitle.text = item.name
@@ -30,7 +30,7 @@ class GridMenuItemViewHolder(
     private val onClickListener: (Menu) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Menu> {
     override fun bind(item: Menu) {
-        binding.ivMenu.load(item.menuImgUrl) {
+        binding.ivMenu.load(item.imageUrl) {
             crossfade(true)
         }
         binding.tvMenuTitle.text = item.name

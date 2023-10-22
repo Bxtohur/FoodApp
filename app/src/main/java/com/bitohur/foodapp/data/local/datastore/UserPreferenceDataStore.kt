@@ -4,19 +4,20 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.bitohur.foodapp.utils.PreferenceDataStoreHelper
 import kotlinx.coroutines.flow.Flow
 
-interface UserPreferenceDataSource{
-    suspend fun isUsingGridPref(): Boolean
-    fun isUsingGridPrefFlow(): Flow<Boolean>
+interface UserPreferenceDataSource {
+    suspend fun getUsingGridPref(): Boolean
+    fun getUsingGridPrefFlow(): Flow<Boolean>
     suspend fun setUsingGridPref(isUsingGrid: Boolean)
 }
 
-class  UserPreferenceDataSourceImpl(private val preferenceHelper: PreferenceDataStoreHelper) :
+class UserPreferenceDataSourceImpl(private val preferenceHelper: PreferenceDataStoreHelper) :
     UserPreferenceDataSource {
-    override suspend fun isUsingGridPref(): Boolean {
+
+    override suspend fun getUsingGridPref(): Boolean {
         return preferenceHelper.getFirstPreference(PREF_USING_GRID, false)
     }
 
-    override fun isUsingGridPrefFlow(): Flow<Boolean> {
+    override fun getUsingGridPrefFlow(): Flow<Boolean> {
         return preferenceHelper.getPreference(PREF_USING_GRID, false)
     }
 
@@ -27,5 +28,4 @@ class  UserPreferenceDataSourceImpl(private val preferenceHelper: PreferenceData
     companion object {
         val PREF_USING_GRID = booleanPreferencesKey("PREF_USING_GRID")
     }
-
 }
