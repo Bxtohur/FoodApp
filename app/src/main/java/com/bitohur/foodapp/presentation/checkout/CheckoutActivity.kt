@@ -29,6 +29,7 @@ import com.bitohur.foodapp.utils.GenericViewModelFactory
 import com.bitohur.foodapp.utils.ResultWrapper
 import com.bitohur.foodapp.utils.proceedWhen
 import com.bitohur.foodapp.utils.toCurrencyFormat
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -36,7 +37,8 @@ class CheckoutActivity : AppCompatActivity() {
     private val viewModel: CheckoutViewModel by viewModels {
         val database = AppDatabase.getInstance(this)
         val cartDao = database.cartDao()
-        val service = FoodAppApiService.invoke()
+        val chuckerInterceptor = ChuckerInterceptor(applicationContext)
+        val service = FoodAppApiService.invoke(chuckerInterceptor)
         val dataSource = FoodAppApiDataSource(service)
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
         val repo: CartRepository = CartRepositoryImpl(cartDataSource, dataSource)

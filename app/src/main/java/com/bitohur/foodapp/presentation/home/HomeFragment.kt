@@ -24,7 +24,6 @@ import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
 import com.bitohur.foodapp.data.repository.MenuRepository
 import com.bitohur.foodapp.data.repository.MenuRepositoryImpl
 import com.bitohur.foodapp.databinding.FragmentHomeBinding
-import com.bitohur.foodapp.di.AppInjection
 import com.bitohur.foodapp.model.Categories
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.presentation.detail.DetailProductActivity
@@ -34,6 +33,7 @@ import com.bitohur.foodapp.presentation.home.adapter.MenuListAdapter
 import com.bitohur.foodapp.utils.GenericViewModelFactory
 import com.bitohur.foodapp.utils.PreferenceDataStoreHelperImpl
 import com.bitohur.foodapp.utils.proceedWhen
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 
 
 class HomeFragment : Fragment() {
@@ -53,7 +53,15 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels {
-        AppInjection(requireContext()).getHomeViewModelFactory()
+        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
+        val service = FoodAppApiService.invoke(chuckerInterceptor)
+        val dataSource = FoodAppApiDataSource(service)
+        val repo: MenuRepository =
+            MenuRepositoryImpl(dataSource)
+        val dataStore = requireActivity().appDataStore
+        val dataStoreHelper = PreferenceDataStoreHelperImpl(dataStore)
+        val userPreferenceDataSource = UserPreferenceDataSourceImpl(dataStoreHelper)
+        GenericViewModelFactory . create (HomeViewModel(repo, userPreferenceDataSource))
     }
 
     private fun navigateToDetail(item: Menu) {
@@ -138,6 +146,7 @@ class HomeFragment : Fragment() {
             })
         }
     }
+
     private fun observeGridPref() {
         viewModel.usingGridLiveData.observe(viewLifecycleOwner) { isUsingGrid ->
             binding.switchListGrid.isChecked = isUsingGrid
@@ -150,19 +159,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun setSwitchAction() {
-        binding.switchListGrid.setOnCheckedChangeListener{
-                _, isUsingGrid -> viewModel.setUsingGridPref(isUsingGrid)
+        binding.switchListGrid.setOnCheckedChangeListener { _, isUsingGrid ->
+            viewModel.setUsingGridPref(isUsingGrid)
         }
     }
 
     private fun setupList() {
-        val span = if(productAdapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
+        val span = if (productAdapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
         binding.rvMenu.apply {
-            layoutManager = GridLayoutManager(requireContext(),span)
+            layoutManager = GridLayoutManager(requireContext(), span)
             adapter = this@HomeFragment.productAdapter
         }
 
     }
+
     private fun setupSwitch() {
         binding.switchListGrid.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setUsingGridPref(isChecked)
