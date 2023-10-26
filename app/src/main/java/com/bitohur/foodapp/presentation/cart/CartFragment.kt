@@ -17,6 +17,7 @@ import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
 import com.bitohur.foodapp.data.repository.CartRepository
 import com.bitohur.foodapp.data.repository.CartRepositoryImpl
 import com.bitohur.foodapp.databinding.FragmentCartBinding
+import com.bitohur.foodapp.di.AppInjection
 import com.bitohur.foodapp.model.Cart
 import com.bitohur.foodapp.presentation.common.adapter.CartListAdapter
 import com.bitohur.foodapp.presentation.common.adapter.CartListener
@@ -29,13 +30,7 @@ import com.bitohur.foodapp.utils.toCurrencyFormat
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private val viewModel: CartViewModel by viewModels {
-        val database = AppDatabase.getInstance(requireContext())
-        val cartDao = database.cartDao()
-        val service = FoodAppApiService.invoke()
-        val dataSource = FoodAppApiDataSource(service)
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource, dataSource)
-        GenericViewModelFactory.create(CartViewModel(repo))
+        AppInjection(requireContext()).getCartViewModelFactory()
     }
 
     private val adapter: CartListAdapter by lazy {

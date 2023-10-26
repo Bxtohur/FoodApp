@@ -24,6 +24,7 @@ import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
 import com.bitohur.foodapp.data.repository.MenuRepository
 import com.bitohur.foodapp.data.repository.MenuRepositoryImpl
 import com.bitohur.foodapp.databinding.FragmentHomeBinding
+import com.bitohur.foodapp.di.AppInjection
 import com.bitohur.foodapp.model.Categories
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.presentation.detail.DetailProductActivity
@@ -52,14 +53,7 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels {
-        val service = FoodAppApiService.invoke()
-        val dataSource = FoodAppApiDataSource(service)
-        val dataStore = this.requireContext().appDataStore
-        val dataStoreHelper = PreferenceDataStoreHelperImpl(dataStore)
-        val userPref: UserPreferenceDataSource = UserPreferenceDataSourceImpl(dataStoreHelper)
-        val repo: MenuRepository =
-            MenuRepositoryImpl(dataSource)
-        GenericViewModelFactory.create(HomeViewModel(repo, userPref))
+        AppInjection(requireContext()).getHomeViewModelFactory()
     }
 
     private fun navigateToDetail(item: Menu) {
