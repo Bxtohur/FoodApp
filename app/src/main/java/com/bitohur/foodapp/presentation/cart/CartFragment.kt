@@ -25,16 +25,18 @@ import com.bitohur.foodapp.utils.GenericViewModelFactory
 import com.bitohur.foodapp.utils.hideKeyboard
 import com.bitohur.foodapp.utils.proceedWhen
 import com.bitohur.foodapp.utils.toCurrencyFormat
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private val viewModel: CartViewModel by viewModels {
         val database = AppDatabase.getInstance(requireContext())
         val cartDao = database.cartDao()
-        val service = FoodAppApiService.invoke()
-        val dataSource = FoodAppApiDataSource(service)
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource, dataSource)
+        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
+        val service = FoodAppApiService.invoke(chuckerInterceptor)
+        val apiDataSource = FoodAppApiDataSource(service)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource,apiDataSource)
         GenericViewModelFactory.create(CartViewModel(repo))
     }
 

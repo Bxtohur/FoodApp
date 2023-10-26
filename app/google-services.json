@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "13123850151",
+    "project_id": "food-app-rizal",
+    "storage_bucket": "food-app-rizal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13123850151:android:bbfb533f698915e968f082",
+        "android_client_info": {
+          "package_name": "com.bitohur.foodapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW_R-6vDF47WFO0yKGuBM0Ry0KTt0cROk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
