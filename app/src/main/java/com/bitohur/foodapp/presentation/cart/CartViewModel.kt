@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.bitohur.foodapp.data.repository.CartRepository
 import com.bitohur.foodapp.model.Cart
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class CartViewModel(private val repo: CartRepository) : ViewModel() {
     val cartList = repo.getUserCartData().asLiveData(Dispatchers.IO)

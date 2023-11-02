@@ -15,25 +15,30 @@ class MenuListAdapter(
     var adapterLayoutMode: AdapterLayoutMode,
     private val onClickListener: (Menu) -> Unit
 ) : RecyclerView.Adapter<ViewHolder>() {
-    private val dataDiffer = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Menu>() {
-        override fun areItemsTheSame(oldItem: Menu, newItem: Menu): Boolean {
-            return oldItem.name == newItem.name &&
+    private val dataDiffer = AsyncListDiffer(
+        this,
+        object : DiffUtil.ItemCallback<Menu>() {
+            override fun areItemsTheSame(oldItem: Menu, newItem: Menu): Boolean {
+                return oldItem.name == newItem.name &&
                     oldItem.price == newItem.price &&
                     oldItem.imageUrl == newItem.imageUrl &&
                     oldItem.desc == newItem.desc
-        }
+            }
 
-        override fun areContentsTheSame(oldItem: Menu, newItem: Menu): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            override fun areContentsTheSame(oldItem: Menu, newItem: Menu): Boolean {
+                return oldItem.hashCode() == newItem.hashCode()
+            }
         }
-    })
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             AdapterLayoutMode.GRID.ordinal -> {
                 GridMenuItemViewHolder(
                     binding = ItemGridMenuBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     ),
                     onClickListener
                 )
@@ -42,14 +47,14 @@ class MenuListAdapter(
             else -> {
                 LinearMenuItemViewHolder(
                     binding = ItemLinearMenuBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     ),
                     onClickListener
                 )
             }
-
         }
-
     }
 
     override fun getItemCount(): Int = dataDiffer.currentList.size
@@ -59,13 +64,13 @@ class MenuListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return  adapterLayoutMode.ordinal
+        return adapterLayoutMode.ordinal
     }
 
-    fun submitData(data: List<Menu>){
+    fun submitData(data: List<Menu>) {
         dataDiffer.submitList(data)
     }
-    fun refreshList(){
+    fun refreshList() {
         notifyItemRangeChanged(0, dataDiffer.currentList.size)
     }
 }

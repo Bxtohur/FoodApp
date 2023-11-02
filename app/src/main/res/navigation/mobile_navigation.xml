@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.bitohur.foodapp.presentation.home.HomeFragment"
-        android:label="Home"
+        android:label="@string/txt_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.bitohur.foodapp.presentation.cart.CartFragment"
-        android:label="Cart"
+        android:label="@string/txt_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.bitohur.foodapp.presentation.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="@string/txt_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

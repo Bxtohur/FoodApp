@@ -19,5 +19,5 @@ data class CartEntity(
     @ColumnInfo(name = "product_img_url")
     var productImgUrl: String,
     @ColumnInfo(name = "item_notes")
-    var itemNotes: String? = null,
+    var itemNotes: String? = null
 )

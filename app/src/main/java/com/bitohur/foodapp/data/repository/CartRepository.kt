@@ -1,11 +1,10 @@
 package com.bitohur.foodapp.data.repository
 
+import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
 import com.bitohur.foodapp.data.local.database.entity.CartEntity
 import com.bitohur.foodapp.data.local.database.mapper.toCartEntity
-import com.bitohur.foodapp.data.local.database.datasource.CartDataSource
 import com.bitohur.foodapp.data.local.database.mapper.toCartList
 import com.bitohur.foodapp.data.network.api.datasource.FoodAppDataSource
-import com.bitohur.foodapp.data.network.api.model.order.OrderItemRequest
 import com.bitohur.foodapp.data.network.api.model.order.OrderRequest
 import com.bitohur.foodapp.model.Cart
 import com.bitohur.foodapp.model.Menu
@@ -33,7 +32,7 @@ interface CartRepository {
 
 class CartRepositoryImpl(
     private val dataSource: CartDataSource,
-    private val apiDataSource: FoodAppDataSource,
+    private val apiDataSource: FoodAppDataSource
 ) : CartRepository {
 
     override fun getUserCartData(): Flow<ResultWrapper<Pair<List<Cart>, Int>>> {
@@ -49,10 +48,11 @@ class CartRepositoryImpl(
                     Pair(result, totalPrice)
                 }
             }.map {
-                if (it.payload?.first?.isEmpty() == true)
+                if (it.payload?.first?.isEmpty() == true) {
                     ResultWrapper.Empty(it.payload)
-                else
+                } else {
                     it
+                }
             }
             .onStart {
                 emit(ResultWrapper.Loading())
@@ -60,7 +60,7 @@ class CartRepositoryImpl(
             }
     }
 
-    //gunakan di detail
+    // gunakan di detail
     override suspend fun createCart(
         product: Menu,
         totalQuantity: Int
@@ -73,7 +73,7 @@ class CartRepositoryImpl(
                         itemQuantity = totalQuantity,
                         productImgUrl = product.imageUrl,
                         productName = product.name,
-                        productPrice = product.price,
+                        productPrice = product.price
                     )
                 )
                 affectedRow > 0
@@ -120,5 +120,4 @@ class CartRepositoryImpl(
             apiDataSource.createOrder(orderRequest).status == true
         }
     }
-
 }

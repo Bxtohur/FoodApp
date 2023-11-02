@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
-
 @Parcelize
 data class Menu(
     val id: String = UUID.randomUUID().toString(),
@@ -14,5 +13,4 @@ data class Menu(
     val price: Int,
     val desc: String,
     val location: String
-): Parcelable
-
+) : Parcelable
