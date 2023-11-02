@@ -18,33 +18,34 @@ class HomeViewModel(
     private val userPreferenceDataSource: UserPreferenceDataSource
 ) : ViewModel() {
 
-    fun setUsingGridPref(getUsingGrid : Boolean) {
+    fun setUsingGridPref(getUsingGrid: Boolean) {
         viewModelScope.launch { userPreferenceDataSource.setUsingGridPref(getUsingGrid) }
     }
     private val _categories = MutableLiveData<ResultWrapper<List<Categories>>>()
-    val categories : LiveData<ResultWrapper<List<Categories>>>
+    val categories: LiveData<ResultWrapper<List<Categories>>>
         get() = _categories
 
     private val _products = MutableLiveData<ResultWrapper<List<Menu>>>()
-    val products : LiveData<ResultWrapper<List<Menu>>>
+    val products: LiveData<ResultWrapper<List<Menu>>>
         get() = _products
 
-    fun getCategories(){
+    fun getCategories() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCategories().collect{
+            repository.getCategories().collect {
                 _categories.postValue(it)
             }
         }
     }
 
-    fun getProducts(category: String? = null){
+    fun getProducts(category: String? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getProducts(if(category == "all") null else category?.toLowerCase()).collect{
+            repository.getProducts(if (category == "all") null else category?.toLowerCase()).collect {
                 _products.postValue(it)
             }
         }
     }
 
     val usingGridLiveData = userPreferenceDataSource.getUsingGridPrefFlow().asLiveData(
-        Dispatchers.IO)
+        Dispatchers.IO
+    )
 }

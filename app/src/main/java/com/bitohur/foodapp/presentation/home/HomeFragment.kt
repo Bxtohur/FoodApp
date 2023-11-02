@@ -1,44 +1,26 @@
 package com.bitohur.foodapp.presentation.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bitohur.foodapp.R
-import com.bitohur.foodapp.data.dummy.DummyCategoriesDataSource
-import com.bitohur.foodapp.data.dummy.DummyCategoriesDataSourceImpl
-import com.bitohur.foodapp.data.dummy.DummyMenuDataSource
-import com.bitohur.foodapp.data.dummy.DummyMenuDataSourceImpl
-import com.bitohur.foodapp.data.local.database.AppDatabase
-import com.bitohur.foodapp.data.local.datastore.UserPreferenceDataSource
-import com.bitohur.foodapp.data.local.datastore.UserPreferenceDataSourceImpl
-import com.bitohur.foodapp.data.local.datastore.appDataStore
-import com.bitohur.foodapp.data.network.api.datasource.FoodAppApiDataSource
-import com.bitohur.foodapp.data.network.api.datasource.FoodAppDataSource
-import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
-import com.bitohur.foodapp.data.repository.MenuRepository
-import com.bitohur.foodapp.data.repository.MenuRepositoryImpl
 import com.bitohur.foodapp.databinding.FragmentHomeBinding
-import com.bitohur.foodapp.model.Categories
 import com.bitohur.foodapp.model.Menu
 import com.bitohur.foodapp.presentation.detail.DetailProductActivity
 import com.bitohur.foodapp.presentation.home.adapter.AdapterLayoutMode
 import com.bitohur.foodapp.presentation.home.adapter.CategoriesListAdapter
 import com.bitohur.foodapp.presentation.home.adapter.MenuListAdapter
-import com.bitohur.foodapp.utils.GenericViewModelFactory
-import com.bitohur.foodapp.utils.PreferenceDataStoreHelperImpl
 import com.bitohur.foodapp.utils.proceedWhen
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val viewModel: HomeViewModel by viewModel()
 
     private val categoryAdapter: CategoriesListAdapter by lazy {
         CategoriesListAdapter {
@@ -52,24 +34,13 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private val viewModel: HomeViewModel by viewModels {
-        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
-        val service = FoodAppApiService.invoke(chuckerInterceptor)
-        val dataSource = FoodAppApiDataSource(service)
-        val repo: MenuRepository =
-            MenuRepositoryImpl(dataSource)
-        val dataStore = requireActivity().appDataStore
-        val dataStoreHelper = PreferenceDataStoreHelperImpl(dataStore)
-        val userPreferenceDataSource = UserPreferenceDataSourceImpl(dataStoreHelper)
-        GenericViewModelFactory . create (HomeViewModel(repo, userPreferenceDataSource))
-    }
-
     private fun navigateToDetail(item: Menu) {
         DetailProductActivity.startActivity(requireContext(), item)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -104,17 +75,17 @@ class HomeFragment : Fragment() {
                 }
                 it.payload?.let { data -> categoryAdapter.submitData(data) }
             }, doOnLoading = {
-                binding.layoutStateCategory.root.isVisible = true
-                binding.layoutStateCategory.pbLoading.isVisible = true
-                binding.layoutStateCategory.tvError.isVisible = false
-                binding.rvCategories.isVisible = false
-            }, doOnError = {
-                binding.layoutStateCategory.root.isVisible = true
-                binding.layoutStateCategory.pbLoading.isVisible = false
-                binding.layoutStateCategory.tvError.isVisible = true
-                binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()
-                binding.rvCategories.isVisible = false
-            })
+                    binding.layoutStateCategory.root.isVisible = true
+                    binding.layoutStateCategory.pbLoading.isVisible = true
+                    binding.layoutStateCategory.tvError.isVisible = false
+                    binding.rvCategories.isVisible = false
+                }, doOnError = {
+                    binding.layoutStateCategory.root.isVisible = true
+                    binding.layoutStateCategory.pbLoading.isVisible = false
+                    binding.layoutStateCategory.tvError.isVisible = true
+                    binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()
+                    binding.rvCategories.isVisible = false
+                })
         }
         viewModel.products.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
@@ -127,23 +98,23 @@ class HomeFragment : Fragment() {
                 }
                 it.payload?.let { data -> productAdapter.submitData(data) }
             }, doOnLoading = {
-                binding.layoutStateProduct.root.isVisible = true
-                binding.layoutStateProduct.pbLoading.isVisible = true
-                binding.layoutStateProduct.tvError.isVisible = false
-                binding.rvMenu.isVisible = false
-            }, doOnError = {
-                binding.layoutStateProduct.root.isVisible = true
-                binding.layoutStateProduct.pbLoading.isVisible = false
-                binding.layoutStateProduct.tvError.isVisible = true
-                binding.layoutStateProduct.tvError.text = it.exception?.message.orEmpty()
-                binding.rvMenu.isVisible = false
-            }, doOnEmpty = {
-                binding.layoutStateProduct.root.isVisible = true
-                binding.layoutStateProduct.pbLoading.isVisible = false
-                binding.layoutStateProduct.tvError.isVisible = true
-                binding.layoutStateProduct.tvError.text = "Product not found"
-                binding.rvMenu.isVisible = false
-            })
+                    binding.layoutStateProduct.root.isVisible = true
+                    binding.layoutStateProduct.pbLoading.isVisible = true
+                    binding.layoutStateProduct.tvError.isVisible = false
+                    binding.rvMenu.isVisible = false
+                }, doOnError = {
+                    binding.layoutStateProduct.root.isVisible = true
+                    binding.layoutStateProduct.pbLoading.isVisible = false
+                    binding.layoutStateProduct.tvError.isVisible = true
+                    binding.layoutStateProduct.tvError.text = it.exception?.message.orEmpty()
+                    binding.rvMenu.isVisible = false
+                }, doOnEmpty = {
+                    binding.layoutStateProduct.root.isVisible = true
+                    binding.layoutStateProduct.pbLoading.isVisible = false
+                    binding.layoutStateProduct.tvError.isVisible = true
+                    binding.layoutStateProduct.tvError.text = "Product not found"
+                    binding.rvMenu.isVisible = false
+                })
         }
     }
 
@@ -170,7 +141,6 @@ class HomeFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), span)
             adapter = this@HomeFragment.productAdapter
         }
-
     }
 
     private fun setupSwitch() {

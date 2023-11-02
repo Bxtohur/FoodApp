@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class MenusResponse (
+data class MenusResponse(
     @SerializedName("code")
     val code: Int?,
     @SerializedName("data")

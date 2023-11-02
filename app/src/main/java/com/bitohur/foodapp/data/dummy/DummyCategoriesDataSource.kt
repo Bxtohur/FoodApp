@@ -6,7 +6,7 @@ interface DummyCategoriesDataSource {
     fun getCategories(): List<Categories>
 }
 
-class DummyCategoriesDataSourceImpl(): DummyCategoriesDataSource {
+class DummyCategoriesDataSourceImpl() : DummyCategoriesDataSource {
     override fun getCategories(): List<Categories> = mutableListOf(
         Categories(
             name = "Nasi",
@@ -25,5 +25,4 @@ class DummyCategoriesDataSourceImpl(): DummyCategoriesDataSource {
             imageUrl = "https://raw.githubusercontent.com/Bxtohur/FoodApp/master/app/src/main/res/drawable/ic_drink.png"
         )
     )
-
 }

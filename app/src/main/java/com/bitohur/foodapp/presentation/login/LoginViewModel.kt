@@ -9,7 +9,6 @@ import com.bitohur.foodapp.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val _loginResult = MutableLiveData<ResultWrapper<Boolean>>()

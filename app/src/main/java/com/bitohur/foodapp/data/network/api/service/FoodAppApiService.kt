@@ -2,9 +2,9 @@ package com.bitohur.foodapp.data.network.api.service
 
 import com.bitohur.foodapp.BuildConfig
 import com.bitohur.foodapp.data.network.api.model.category.CategoriesResponse
+import com.bitohur.foodapp.data.network.api.model.menu.MenusResponse
 import com.bitohur.foodapp.data.network.api.model.order.OrderRequest
 import com.bitohur.foodapp.data.network.api.model.order.OrderResponse
-import com.bitohur.foodapp.data.network.api.model.menu.MenusResponse
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,7 +27,7 @@ interface FoodAppApiService {
 
     companion object {
         @JvmStatic
-        operator fun invoke(chucker : ChuckerInterceptor): FoodAppApiService {
+        operator fun invoke(chucker: ChuckerInterceptor): FoodAppApiService {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(chucker)
                 .connectTimeout(120, TimeUnit.SECONDS)
@@ -42,4 +42,3 @@ interface FoodAppApiService {
         }
     }
 }
-

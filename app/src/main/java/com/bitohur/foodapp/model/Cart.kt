@@ -2,15 +2,14 @@ package com.bitohur.foodapp.model
 
 import com.bitohur.foodapp.data.network.api.model.order.OrderItemRequest
 
-
 data class Cart(
     var id: Int? = null,
-    var productId : String,
-    var productName : String,
-    var productPrice : Int,
+    var productId: String,
+    var productName: String,
+    var productPrice: Int,
     var itemQuantity: Int = 0,
     var productImgUrl: String,
-    var itemNotes: String? = null,
+    var itemNotes: String? = null
 )
 
 fun Cart.toOrderItemRequest() = OrderItemRequest(

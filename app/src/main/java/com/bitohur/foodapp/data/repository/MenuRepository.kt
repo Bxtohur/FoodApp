@@ -14,7 +14,8 @@ interface MenuRepository {
     fun getProducts(category: String? = null): Flow<ResultWrapper<List<Menu>>>
 }
 
-class MenuRepositoryImpl(private val apiDataSource: FoodAppDataSource
+class MenuRepositoryImpl(
+    private val apiDataSource: FoodAppDataSource
 ) : MenuRepository {
 
     override fun getCategories(): Flow<ResultWrapper<List<Categories>>> {
@@ -28,5 +29,4 @@ class MenuRepositoryImpl(private val apiDataSource: FoodAppDataSource
             apiDataSource.getProducts(category).data?.toProductList() ?: emptyList()
         }
     }
-
 }

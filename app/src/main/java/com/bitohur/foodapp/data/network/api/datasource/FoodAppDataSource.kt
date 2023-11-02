@@ -1,9 +1,9 @@
 package com.bitohur.foodapp.data.network.api.datasource
 
 import com.bitohur.foodapp.data.network.api.model.category.CategoriesResponse
+import com.bitohur.foodapp.data.network.api.model.menu.MenusResponse
 import com.bitohur.foodapp.data.network.api.model.order.OrderRequest
 import com.bitohur.foodapp.data.network.api.model.order.OrderResponse
-import com.bitohur.foodapp.data.network.api.model.menu.MenusResponse
 import com.bitohur.foodapp.data.network.api.service.FoodAppApiService
 
 interface FoodAppDataSource {
@@ -12,7 +12,7 @@ interface FoodAppDataSource {
     suspend fun createOrder(orderRequest: OrderRequest): OrderResponse
 }
 
-class FoodAppApiDataSource(private val service: FoodAppApiService) : FoodAppDataSource{
+class FoodAppApiDataSource(private val service: FoodAppApiService) : FoodAppDataSource {
     override suspend fun getProducts(category: String?): MenusResponse {
         return service.getProducts(category)
     }
@@ -24,5 +24,4 @@ class FoodAppApiDataSource(private val service: FoodAppApiService) : FoodAppData
     override suspend fun createOrder(orderRequest: OrderRequest): OrderResponse {
         return service.createOrder(orderRequest)
     }
-
 }

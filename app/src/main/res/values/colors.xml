@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey_text">#767676</color>
-    <color name="grey_border">#CCC3C3C3</color>
-    <color name="grey_background">#CCEDEDED</color>
     <color name="app_color_primary">#FC8D13</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="app_color_on_primary">#FFF</color>
@@ -15,11 +12,6 @@
     <color name="app_color_on_secondary">#FC8D13</color>
     <color name="app_color_secondary_container">#FC8D13</color>
     <color name="app_color_on_secondary_container">#1B2025</color>
-
-    <color name="app_color_tertiary">#1B2025</color>
-    <color name="app_color_on_tertiary">#FFFFFF</color>
-    <color name="app_color_tertiary_container">#1B2025</color>
-    <color name="app_color_on_tertiary_container">#FFFFFF</color>
 
     <color name="app_color_error">#EA001F</color>
     <color name="app_color_on_error">#FFFFFF</color>

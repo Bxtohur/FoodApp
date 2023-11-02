@@ -6,32 +6,31 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.bitohur.foodapp.core.ViewHolderBinder
-import com.bitohur.foodapp.databinding.ItemGridMenuBinding
 import com.bitohur.foodapp.databinding.ItemListCategoriesBinding
 import com.bitohur.foodapp.model.Categories
-import com.bitohur.foodapp.model.Menu
 
 class CategoriesListAdapter(private val itemClick: (Categories) -> Unit) :
     RecyclerView.Adapter<CategoriesListAdapter.ItemCategoryViewHolder>() {
 
-
     private val dataDiffer =
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<Categories>() {
-            override fun areItemsTheSame(
-                oldItem: Categories,
-                newItem: Categories
-            ): Boolean {
-                return oldItem.name == newItem.name
-            }
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<Categories>() {
+                override fun areItemsTheSame(
+                    oldItem: Categories,
+                    newItem: Categories
+                ): Boolean {
+                    return oldItem.name == newItem.name
+                }
 
-            override fun areContentsTheSame(
-                oldItem: Categories,
-                newItem: Categories
-            ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
+                override fun areContentsTheSame(
+                    oldItem: Categories,
+                    newItem: Categories
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
             }
-        })
+        )
 
     fun submitData(data: List<Categories>) {
         dataDiffer.submitList(data)
@@ -61,7 +60,7 @@ class CategoriesListAdapter(private val itemClick: (Categories) -> Unit) :
 
         fun bindView(item: Categories) {
             with(item) {
-                binding.ivIconCategories.load(item.imageUrl){
+                binding.ivIconCategories.load(item.imageUrl) {
                     crossfade(true)
                 }
                 binding.tvCategoriesName.text = item.name
