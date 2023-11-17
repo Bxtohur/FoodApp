@@ -21,6 +21,7 @@ class HomeViewModel(
     fun setUsingGridPref(getUsingGrid: Boolean) {
         viewModelScope.launch { userPreferenceDataSource.setUsingGridPref(getUsingGrid) }
     }
+
     private val _categories = MutableLiveData<ResultWrapper<List<Categories>>>()
     val categories: LiveData<ResultWrapper<List<Categories>>>
         get() = _categories
